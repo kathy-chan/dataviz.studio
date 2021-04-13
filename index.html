@@ -2,17 +2,30 @@
 <html lang="en">
 <head>
 	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
-
-	<title>Svelte app</title>
-
-	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='/global.css'>
-	<link rel='stylesheet' href='/build/bundle.css'>
-
-	<script defer src='/build/bundle.js'></script>
+	
+	<title>D3 Setup </title>
 </head>
 
 <body>
+	<h1 id="headerID">D3 Setup</h1>
+
+	
+	<script src="myScript.js"></script>
+
+	<div id="observablehq-globe-87bb6a6e"></div>
+	<div id="observablehq-viewof-rotation-87bb6a6e"></div>
+	<div id="observablehq-viewof-quakeSize-87bb6a6e"></div>
+	<p>Credit: <a href="https://observablehq.com/@kathy-chan/earthquakes">Earthquakes! by kathy-chan</a></p>
+	
+	<script type="module">
+	import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+	import define from "https://api.observablehq.com/@kathy-chan/earthquakes.js?v=3";
+	new Runtime().module(define, name => {
+	  if (name === "globe") return new Inspector(document.querySelector("#observablehq-globe-87bb6a6e"));
+	  if (name === "viewof rotation") return new Inspector(document.querySelector("#observablehq-viewof-rotation-87bb6a6e"));
+	  if (name === "viewof quakeSize") return new Inspector(document.querySelector("#observablehq-viewof-quakeSize-87bb6a6e"));
+	  return ["quakeRadius"].includes(name);
+	});
+	</script>
 </body>
 </html>
